@@ -1,10 +1,10 @@
 import { Component } from "react";
 import ComponentButton from "../../common/components/button";
 import {ProductsContext} from "../../common/contexts/productsContext";
-import { ParagraphGeneral, ParagraphRoboto, TitleRalewayH2, TitleRalewayH3 } from "../../common/foundation/typography";
+import { ParagraphGeneral, ParagraphRoboto, TitleRalewayH1, TitleRalewayH2, TitleRalewayH3 } from "../../common/foundation/typography";
 import queryProductById from "../../services/queryProductById";
 import Page404 from "../404";
-import { AttributesItemsBox, ContainerMainImg, ContainerMiniaturesBox, ContainerProductDetail, DetailButtonBox, DetailPrice, DetailsAttributes, DetailsDescription, DetailsTitles, ItemBoxValues, ProductPageContainer } from "./style";
+import { AttributesItemsBox, AttributesNamesText, ContainerMainImg, ContainerMiniaturesBox, ContainerProductDetail, DetailButtonBox, DetailPrice, DetailsAttributes, DetailsDescription, DetailsTitles, ItemBoxValues, PriceValueText, ProductPageContainer } from "./style";
 import {CurrencyContext} from '../../common/contexts/currencyContext.js';
 
 
@@ -87,8 +87,8 @@ class pageProduct extends Component{
 
                 <ContainerProductDetail>
                     <DetailsTitles>
-                        <TitleRalewayH2>{this.state.product.brand}</TitleRalewayH2>
-                        <TitleRalewayH3>{this.state.product.name}</TitleRalewayH3>
+                        <TitleRalewayH1>{this.state.product.brand}</TitleRalewayH1>
+                        <TitleRalewayH2>{this.state.product.name}</TitleRalewayH2>
                     </DetailsTitles>
 
                     <DetailsAttributes>
@@ -96,7 +96,7 @@ class pageProduct extends Component{
                             const customRandomInputName = Math.floor(Math.random()*1000);
                             return(
                                 <div key={attribute.id+index}>
-                                <ParagraphRoboto >{attribute.name}:</ParagraphRoboto>
+                                <AttributesNamesText>{attribute.name}:</AttributesNamesText>
                                 
                                 <AttributesItemsBox>
                                     {attribute.items.map((attributeItem, index)=>{
@@ -123,16 +123,16 @@ class pageProduct extends Component{
                     </DetailsAttributes>
 
                     <DetailPrice>
-                        <ParagraphRoboto>
+                        <AttributesNamesText>
                             Price:
-                        </ParagraphRoboto>
+                        </AttributesNamesText>
 
                         <CurrencyContext.Consumer>
                             {currencyData=>{
                                     const price = this.state.product.prices.find(price=> price.currency.label == currencyData.currency.label)
                                 return(
                                     <div>
-                                    <ParagraphRoboto>{price.currency.symbol} {price.amount}</ParagraphRoboto>
+                                    <PriceValueText>{price.currency.symbol} {price.amount}</PriceValueText>
 
                                     </div>
                                 )

@@ -29,7 +29,7 @@ export const HeaderContainer = styled.header`
 
 
     .logo{
-        width: 3vw;
+        width: 2.75vw;
         height: auto;
     }
 `;
@@ -52,7 +52,7 @@ export const NavigationLinkBox = styled.div`
 
     span{
         position: absolute;
-        bottom:-100%;
+        bottom:-60%;
         width:${props=>props.selected ? "100%" : "0%"};
         border-top: 2px solid ${secondaryColor};
         transition: 0.5s;
@@ -138,7 +138,7 @@ export const BoxRightCart = styled.div`
     position: relative;
     
     svg{
-        width: 2vw;
+        width: 1.75vw;
         height: auto;
         cursor: pointer;
     }
@@ -163,14 +163,12 @@ export const BoxRightCart = styled.div`
 
 //bag div style starts
 export const CartBagPreview = styled.div`
-    width: 40vw;
-    height: ${props=> props.bag ? "60vh" : "0vh"};
+    width: 30vw;
+    height: ${props=> props.bag ? "95vh" : "0vh"};
     overflow:${props=>props.bag ? "auto": "hidden"};
-    max-height: 60vh;
     display: flex;
     flex-direction: column;
-    gap: 3vh;
-    
+    gap: 1.5vh;
     position: absolute;
     top: 7vh;
     right: -2.5vw;
@@ -178,6 +176,18 @@ export const CartBagPreview = styled.div`
     background: ${mainColor};
     transition: 0.5s;
     z-index: 2;
+
+    .title{
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5vh;
+    }
+
+    .total{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
 `;
 
 export const BagButtonBox = styled.div`

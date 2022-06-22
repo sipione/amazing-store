@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { CardDescription, CardImage, ContainerProductsBox, ProductCard, ShopPageContainer } from "./style";
+import { CardDescription, CardImage, ContainerProductsBox, ProductCard, ShopPageContainer, ShopPagePriceParagraph } from "./style";
 import queryAllProducts from "../../services/queryAllProducts";
 import { Link } from "react-router-dom";
-import {ParagraphRoboto, TitleRalewayH1, TitleRalewayH2, TitleRalewayH3} from '../../common/foundation/typography';
+import {ParagraphGeneral, ParagraphRoboto, TitleRalewayH1, TitleRalewayH2, TitleRalewayH3} from '../../common/foundation/typography';
 import {ProductsContext} from "../../common/contexts/productsContext";
 import {CurrencyContext} from "../../common/contexts/currencyContext";
 import {ReactComponent as CartWhite} from "../../assets/images/cartWhite.svg"
@@ -44,16 +44,16 @@ class PageShop extends Component{
 
                                 <Link to={`/${product.id}`}>
                                 <CardDescription>
-                                    <TitleRalewayH3>{product.name}</TitleRalewayH3>
+                                    <ParagraphGeneral>{product.name}</ParagraphGeneral>
                                     
                                     <CurrencyContext.Consumer>
                                     {currencyData=>{
                                         return(
                                         product.prices.map((price, index)=>{
                                             if(price.currency.label === currencyData.currency.label){
-                                                return(<ParagraphRoboto key={price.label+index}>
+                                                return(<ShopPagePriceParagraph key={price.label+index}>
                                                     {price.currency.symbol + price.amount}
-                                                </ParagraphRoboto>)
+                                                </ShopPagePriceParagraph>)
                                             } 
                                         })
                                         )

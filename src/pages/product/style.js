@@ -1,6 +1,16 @@
 import styled from "styled-components";
+import { TitleRalewayH2, TitleRalewayH3 } from "../../common/foundation/typography";
 import { mainColor, primaryColor, secondaryColor } from "../../common/foundation/variables";
 
+//typography start
+export const AttributesNamesText = styled(TitleRalewayH3)`
+    font-weight: 700;
+`
+
+export const PriceValueText = styled(TitleRalewayH2)`
+    font-weight: 600;
+`
+//typography ends
 
 export const ProductPageContainer = styled.section`
     width: 100%;

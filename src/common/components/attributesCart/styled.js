@@ -6,12 +6,15 @@ export const AttributesContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1vh;
+    margin-top: 1vh;
 `
 
 export const AttributesItemBox = styled.div`
     width: 100%;
     display: flex;
     gap: 1vw;
+    transform: scale(${props=>props.minicart ? 0.8 : 1});
+    transform-origin: 0% 0%;
 
     .selected{
         background: ${props=>props.text ? primaryColor : ""};
@@ -40,7 +43,6 @@ export const ItemBoxValues = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
-    margin-bottom:1.5vh;
 
     p{
         display: ${props=>props.text ? "block" : "none"};

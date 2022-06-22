@@ -4,7 +4,9 @@ export const CartPageContainer = styled.section`
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 3vh;
     padding: 0 2.5vw;
+    margin-bottom: 6vh;
 `;
 
 export const CartProductsList = styled.div`

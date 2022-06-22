@@ -3,13 +3,18 @@ import {CurrencyContext} from "../../contexts/currencyContext";
 import { ProductsContext } from "../../contexts/productsContext";
 import { ParagraphRoboto, TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
 import AttributesCart from "../attributesCart";
-import { AreYouSureContainer, DetailsRightQuantity, ItemDetailsLeft, ItemDetailsRight, ItemDetailsRightGallery, ItemsCartListContainer } from "./style";
+import { AreYouSureContainer, DetailsRightQuantity, ItemBrandText, ItemDetailsLeft, ItemDetailsRight, ItemDetailsRightGallery, ItemNameText, ItemPriceText, ItemsCartListContainer } from "./style";
 import {ReactComponent as Add} from '../../../assets/images/add.svg';
 import {ReactComponent as Remove} from '../../../assets/images/remove.svg';
 
 
 class ComponentItemsCartList extends Component{
     static contextType = ProductsContext;
+
+    constructor({props, minicart=false}){
+        super(props);
+        this.minicart = minicart;
+    }
 
     
     definePrice(prices){
@@ -19,8 +24,7 @@ class ComponentItemsCartList extends Component{
                     const price = prices.find(price=> price.currency.label === data.currency.label)
                     return(
                         <div>
-                            <ParagraphRoboto>Price:</ParagraphRoboto>
-                            <ParagraphRoboto>{price.currency.symbol} {price.amount}</ParagraphRoboto>
+                            <ItemPriceText minicart={this.minicart}>{price.currency.symbol} {price.amount}</ItemPriceText>
                         </div>
                     )
                 }}
@@ -60,16 +64,18 @@ class ComponentItemsCartList extends Component{
             this.context.cart.map(product=>{
                 return(
                 <ItemsCartListContainer>
-                    <ItemDetailsLeft>
-                        <TitleRalewayH3>{product.brand}</TitleRalewayH3>
-                        <TitleRalewayH3>{product.name}</TitleRalewayH3>
+                    <ItemDetailsLeft minicart={this.minicart}>
+                        <ItemBrandText minicart={this.minicart}>{product.brand}</ItemBrandText>
+                        <ItemNameText minicart={this.minicart}>{product.name}</ItemNameText>
                         
                         {this.definePrice(product.prices)}
 
-                        <AttributesCart
-                            attributes={product.attributes}
-                            selection={product.selectedAttr}
-                        />
+                            <AttributesCart
+                                minicart={this.minicart}
+                                attributes={product.attributes}
+                                selection={product.selectedAttr}
+                            />
+
                     </ItemDetailsLeft>
 
                     <ItemDetailsRight>
@@ -87,7 +93,7 @@ class ComponentItemsCartList extends Component{
                             />
                         </DetailsRightQuantity>
 
-                        <ItemDetailsRightGallery>
+                        <ItemDetailsRightGallery minicart={this.minicart}>
                         <img
                         src={product.gallery[0]} 
                         alt="product representation

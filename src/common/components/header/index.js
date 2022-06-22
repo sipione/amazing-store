@@ -3,7 +3,7 @@ import { BagButtonBox, BoxRightCart, BoxRightCurrencyDiv, CartBagPreview, Curren
 import {ReactComponent as Logo} from "../../../assets/images/logo.svg"
 import {Link} from 'react-router-dom';
 import queryCategories from '../../../services/queryCategories.js';
-import { ParagraphRoboto, TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
+import { ParagraphGeneral, ParagraphRoboto, TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
 import queryCurrency from "../../../services/queryCurrency";
 import { CurrencyContext } from "../../contexts/currencyContext";
 import { ProductsContext } from "../../contexts/productsContext";
@@ -70,9 +70,9 @@ class ComponentHeader extends Component{
                             this.context.handleCategory(category.name)
                         }} 
                         >
-                            <TitleRalewayH2>
-                            {category.name.slice(0, 1).toUpperCase() + category.name.slice(1)}
-                            </TitleRalewayH2>
+                            <ParagraphGeneral>
+                            {category.name.toUpperCase()}
+                            </ParagraphGeneral>
                                 
                             <span> </span>
                         </NavigationLinkBox>
@@ -92,7 +92,7 @@ class ComponentHeader extends Component{
                             onMouseLeave={()=>this.handleOpenBox(false)}
                             open={this.state.open}
                             >
-                                <TitleRalewayH3>{currencyData.currency.symbol}</TitleRalewayH3>
+                                <ParagraphGeneral>{currencyData.currency.symbol}</ParagraphGeneral>
                                 
                                 <span className="arrow">v</span>
                                 
@@ -107,13 +107,13 @@ class ComponentHeader extends Component{
                                         bg={currencyData.currency.label === currency.label}
                                         onClick={()=>currencyData.handleCurrency({label: currency.label, symbol: currency.symbol})}
                                         >
-                                            <TitleRalewayH3>
-                                                {currency.label}
-                                            </TitleRalewayH3>
-
-                                            <TitleRalewayH3>
+                                            <ParagraphGeneral>
                                             {currency.symbol}
-                                            </TitleRalewayH3>
+                                            </ParagraphGeneral>
+
+                                            <ParagraphGeneral>
+                                                {currency.label}
+                                            </ParagraphGeneral>
                                         </OptionsValuesBox>
                                         )
                                     })}
@@ -125,25 +125,28 @@ class ComponentHeader extends Component{
 
                     <BoxRightCart empty={this.context.cart.length<=0}>
                         <Cart onClick={()=>this.setState({bag: !this.state.bag})}/>
-                        <TitleRalewayH3 className="number">{this.context.totalItems}</TitleRalewayH3>
+                        <ParagraphGeneral className="number">{this.context.totalItems}</ParagraphGeneral>
 
                         <CartBagPreview 
                             onMouseLeave={()=>this.setState({bag: false})} 
                             bag={this.state.bag}
                         >
-                            <TitleRalewayH2>My Bag, {this.context.totalItems} {this.context.totalItems < 2 ? "item" : "items"}</TitleRalewayH2>
+                            <div className="title">
+                            <ParagraphRoboto>My Bag, </ParagraphRoboto>
+                            <ParagraphGeneral>{this.context.totalItems} {this.context.totalItems < 2 ? "item" : "items"}</ParagraphGeneral>
+                            </div>
                             
-                            <ComponentItemsCartList/>
+                            <ComponentItemsCartList minicart={true}/>
 
-                            <div>
-                                <TitleRalewayH2>TOTAL:</TitleRalewayH2> 
+                            <div className="total">
+                                <ParagraphRoboto>Total:</ParagraphRoboto> 
                                 {this.getFinalPrice()}
                             </div>
 
                             <BagButtonBox>
-                                <Link to="cart"><ComponentButton>VIEW BAG</ComponentButton></Link>
+                                <Link to="cart"><ComponentButton variant={true}>VIEW BAG</ComponentButton></Link>
                                 
-                                <Link to="#"><ComponentButton variant={true}>LOG OUT</ComponentButton></Link>
+                                <Link to="#"><ComponentButton>LOG OUT</ComponentButton></Link>
                             </BagButtonBox>
                         </CartBagPreview>
 

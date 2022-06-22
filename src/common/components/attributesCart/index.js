@@ -5,10 +5,11 @@ import { AttributesContainer, AttributesItemBox, ItemBoxValues } from "./styled"
 
 class AttributesCart extends Component{
 
-    constructor({props, attributes, selection}){
+    constructor({props, attributes, minicart, selection}){
         super(props);
         this.attributes= attributes;
         this.selection = selection;
+        this.minicart = minicart;
     }
 
     render(){
@@ -19,7 +20,7 @@ class AttributesCart extends Component{
                 <AttributesContainer key={attribute.id+index}>
                     <ParagraphRoboto>{attribute.name}:</ParagraphRoboto>
                 
-                    <AttributesItemBox text={attribute.type === "text"}>
+                    <AttributesItemBox minicart={this.minicart} text={attribute.type === "text"}>
                         {attribute.items.map((attributeItem, index)=>{
                             
                             return(

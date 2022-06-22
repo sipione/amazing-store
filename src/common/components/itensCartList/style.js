@@ -1,6 +1,24 @@
 import { printIntrospectionSchema } from "graphql";
 import styled from "styled-components";
-import { backgroundSelectedItemColor, mainColor, primaryColor } from "../../foundation/variables";
+import { TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
+import { backgroundSelectedItemColor, h2FontSize, h3FontSize, mainColor, paragraphFontSize, primaryColor } from "../../foundation/variables";
+
+//typography starts
+export const ItemBrandText = styled(TitleRalewayH2)`
+    font-size: ${props=>props.minicart ? h3FontSize : h2FontSize};
+    font-weight: 700;
+`;
+
+export const ItemNameText = styled(ItemBrandText)`
+    font-weight: 400;
+`;
+
+export const ItemPriceText = styled(TitleRalewayH3)`
+    font-size: ${props=>props.minicart ? paragraphFontSize : h3FontSize};
+    font-weight: 700;
+`
+//typography ends
+
 
 export const ItemsCartListContainer = styled.div`
     width: 100%;
@@ -15,7 +33,7 @@ export const ItemDetailsLeft = styled.div`
     width: 40%;
     display: flex;
     flex-direction: column;
-    gap: 1vh;
+    gap: ${props=>props.minicart ? "1vh" : "2vh"};
 `;
 
 export const ItemDetailsRight = styled.div`
@@ -39,11 +57,12 @@ export const ItemDetailsRightGallery = styled.div`
     width: auto;
     display: flex;
     justify-content: center;
-    align-itens: center;
+    align-items: center;
     position: relative;
 
     img{
-        width: 150px;
+        width: ${props=>props.minicart ? "150px" : "200px"};
+        height: auto;
     }
 
     button{

@@ -1,5 +1,12 @@
 import styled from 'styled-components'
+import { ParagraphGeneral } from '../../common/foundation/typography';
 import { mainColor, outOfStockColor, primaryColor, secondaryColor } from '../../common/foundation/variables';
+
+//typography starts
+export const ShopPagePriceParagraph = styled(ParagraphGeneral)`
+  font-weight: 700;
+`
+//typography ends
 
 export const ShopPageContainer = styled.section`
     width: 100%;
