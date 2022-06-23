@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, memo } from "react";
 import { ButtonComponent } from "./style";
 
 
@@ -16,4 +16,4 @@ class ComponentButton extends Component{
     }
 }
 
-export default ComponentButton;
+export default memo(ComponentButton);

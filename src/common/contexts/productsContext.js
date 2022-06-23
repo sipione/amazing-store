@@ -68,7 +68,6 @@ class ProductsContextProvider extends Component{
             : item.quantity -= 1 
             : ""
         );
-
         this.handleTotalItems(array);
         return this.setState({cart: array})
     }

@@ -60,8 +60,10 @@ class ComponentItemsCartList extends Component{
     }
 
     render(){
+        console.log(this.context)
+        console.log("rerenderização itemCartList Component")
         return(
-            this.context.cart.map(product=>{
+            this.context.cart.map((product, index)=>{
                 return(
                 <ItemsCartListContainer>
                     <ItemDetailsLeft minicart={this.minicart}>
@@ -70,11 +72,10 @@ class ComponentItemsCartList extends Component{
                         
                         {this.definePrice(product.prices)}
 
-                            <AttributesCart
-                                minicart={this.minicart}
-                                attributes={product.attributes}
-                                selection={product.selectedAttr}
-                            />
+                        <AttributesCart
+                            index = {index}
+                            minicart={this.minicart}
+                        />
 
                     </ItemDetailsLeft>
 
