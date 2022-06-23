@@ -9,16 +9,11 @@ class AttributesCart extends Component{
     static contextType = ProductsContext
 
     constructor({props, minicart, index}){
-        console.log("fui construido")
         super(props);
         this.state={
             minicart: minicart, 
             index: index
         } 
-    }
-
-    componentDidMount(){
-        console.log("fui montado")
     }
 
     render(){

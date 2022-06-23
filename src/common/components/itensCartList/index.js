@@ -60,8 +60,6 @@ class ComponentItemsCartList extends Component{
     }
 
     render(){
-        console.log(this.context)
-        console.log("rerenderização itemCartList Component")
         return(
             this.context.cart.map((product, index)=>{
                 return(
