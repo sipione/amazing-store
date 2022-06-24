@@ -3,7 +3,7 @@ import { BagButtonBox, BoxRightCart, BoxRightCurrencyDiv, CartBagPreview, Curren
 import {ReactComponent as Logo} from "../../../assets/images/logo.svg"
 import {Link} from 'react-router-dom';
 import queryCategories from '../../../services/queryCategories.js';
-import { ParagraphGeneral, ParagraphRoboto, TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
+import { ParagraphGeneral, ParagraphRoboto} from "../../foundation/typography";
 import queryCurrency from "../../../services/queryCurrency";
 import { CurrencyContext } from "../../contexts/currencyContext";
 import { ProductsContext } from "../../contexts/productsContext";
@@ -65,7 +65,7 @@ class ComponentHeader extends Component{
                         return(
                         <Link key={category.name+index} to="/">
                         <NavigationLinkBox
-                        selected={this.context.category == category.name}
+                        selected={this.context.category === category.name}
                         onClick={(event)=>{
                             this.context.handleCategory(category.name)
                         }} 

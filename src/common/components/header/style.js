@@ -1,4 +1,3 @@
-import { selectHttpOptionsAndBodyInternal } from "@apollo/client";
 import styled from "styled-components";
 import { backgroundSelectedItemColor, mainColor, primaryColor, secondaryColor } from "../../foundation/variables";
 

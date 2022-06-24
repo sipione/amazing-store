@@ -1,7 +1,7 @@
 import { Component } from "react";
 import ComponentButton from "../../common/components/button";
 import {ProductsContext} from "../../common/contexts/productsContext";
-import { ParagraphGeneral, ParagraphRoboto, TitleRalewayH1, TitleRalewayH2, TitleRalewayH3 } from "../../common/foundation/typography";
+import { ParagraphGeneral, TitleRalewayH1, TitleRalewayH2} from "../../common/foundation/typography";
 import queryProductById from "../../services/queryProductById";
 import Page404 from "../404";
 import { AttributesItemsBox, AttributesNamesText, ContainerMainImg, ContainerMiniaturesBox, ContainerProductDetail, DetailButtonBox, DetailPrice, DetailsAttributes, DetailsDescription, DetailsTitles, ItemBoxValues, PriceValueText, ProductPageContainer } from "./style";
@@ -76,7 +76,7 @@ class pageProduct extends Component{
                 </ContainerMiniaturesBox>
 
                 <ContainerMainImg>
-                    <img src={this.state.mainImgSrc}/>
+                    <img src={this.state.mainImgSrc} alt="product main representation"/>
                 </ContainerMainImg>
 
                 <ContainerProductDetail>
@@ -128,7 +128,7 @@ class pageProduct extends Component{
 
                         <CurrencyContext.Consumer>
                             {currencyData=>{
-                                    const price = this.state.product.prices.find(price=> price.currency.label == currencyData.currency.label)
+                                    const price = this.state.product.prices.find(price=> price.currency.label === currencyData.currency.label)
                                 return(
                                     <div>
                                     <PriceValueText>{price.currency.symbol} {price.amount}</PriceValueText>

@@ -1,4 +1,3 @@
-import { printIntrospectionSchema } from "graphql";
 import styled from "styled-components";
 import { TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
 import { backgroundSelectedItemColor, h2FontSize, h3FontSize, mainColor, paragraphFontSize, primaryColor } from "../../foundation/variables";
