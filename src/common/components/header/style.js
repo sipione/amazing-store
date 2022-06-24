@@ -12,15 +12,19 @@ export const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: fixed;
+    top:0;
+    background: ${mainColor};
+    z-index: 3;
 
     :before{
+        content: "";
         width: ${props=>props.open ? "100%": props.bag ? "100%" : "0%"};
-        height: ${props=>props.open ? "100vh": props.bag ? "100vh" : "0vh"};
+        height: ${props=>props.open ? "100%": props.bag ? "100%" : "0vh"};
         transition: 0.5s;
         content: "";
-        position: absolute;
-        top:100%;
+        position: fixed;
+        top: 10vh;
         right:0;
         background: ${primaryColor};
         opacity: 0.6;
@@ -86,6 +90,7 @@ export const BoxRightCurrencyDiv = styled.div`
     align-items: center;
     position: relative;
     cursor: pointer;
+    z-index: 3;
     
     .arrow{
         position: absolute;
@@ -164,7 +169,7 @@ export const BoxRightCart = styled.div`
 //bag div style starts
 export const CartBagPreview = styled.div`
     width: 30vw;
-    height: ${props=> props.bag ? "95vh" : "0vh"};
+    height: ${props=> props.bag ? "80vh" : "0vh"};
     overflow:${props=>props.bag ? "auto": "hidden"};
     display: flex;
     flex-direction: column;

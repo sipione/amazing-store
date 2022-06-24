@@ -13,6 +13,7 @@ export const ShopPageContainer = styled.section`
     display: flex;
     flex-direction: column;
     padding: 0 2.5vw;
+    margin: 10vh 0;
 `;
 
 export const ContainerProductsBox = styled.div`

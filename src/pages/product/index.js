@@ -6,6 +6,7 @@ import queryProductById from "../../services/queryProductById";
 import Page404 from "../404";
 import { AttributesItemsBox, AttributesNamesText, ContainerMainImg, ContainerMiniaturesBox, ContainerProductDetail, DetailButtonBox, DetailPrice, DetailsAttributes, DetailsDescription, DetailsTitles, ItemBoxValues, PriceValueText, ProductPageContainer } from "./style";
 import {CurrencyContext} from '../../common/contexts/currencyContext.js';
+import DOMPurify from 'dompurify';
 
 
 class pageProduct extends Component{
@@ -141,15 +142,14 @@ class pageProduct extends Component{
                     <DetailButtonBox
                     onClick={(event)=>{
                         event.preventDefault();
-
-                        this.handleSubmit();
+                        this.state.product.inStock ? this.handleSubmit() : alert("Sorry, this product is out of stock. Subcribe for newsletter to be informed about our news and stock replenishment");
                     }}
                     >
-                    <ComponentButton>ADD TO CART</ComponentButton>
+                    <ComponentButton desable={!this.state.product.inStock} >ADD TO CART</ComponentButton>
                     </DetailButtonBox>
 
 
-                    <DetailsDescription>{this.state.product.description}</DetailsDescription> 
+                    <DetailsDescription dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(this.state.product.description)}}/>
                 </ContainerProductDetail>
             </ProductPageContainer>
         )

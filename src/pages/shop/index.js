@@ -37,12 +37,12 @@ class PageShop extends Component{
                             key={product.id+index}
                             category={product.category===productsData.category || productsData.category==="all"}
                             >
+                                <Link to={`/${product.id}`}>
                                 <span className="stock"> <TitleRalewayH2>OUT OF STOCK</TitleRalewayH2></span>
                                 <CardImage>
                                     <img src={product.gallery[0]} alt="product ilustrative representation"/>
                                 </CardImage>
 
-                                <Link to={`/${product.id}`}>
                                 <CardDescription>
                                     <ParagraphGeneral>{product.name}</ParagraphGeneral>
                                     
@@ -61,11 +61,11 @@ class PageShop extends Component{
                                     </CurrencyContext.Consumer>
 
                                 </CardDescription>
+                                </Link>
                                 
                                 <span className="cartwhite">
                                     <CartWhite/> 
                                 </span>
-                                </Link>
                             </ProductCard>
                         )
                     })}

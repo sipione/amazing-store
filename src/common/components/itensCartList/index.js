@@ -1,4 +1,5 @@
 import { Component, memo } from "react";
+import {Link} from 'react-router-dom';
 import {CurrencyContext} from "../../contexts/currencyContext";
 import { ProductsContext } from "../../contexts/productsContext";
 import AttributesCart from "../attributesCart";
@@ -63,7 +64,7 @@ class ComponentItemsCartList extends Component{
             this.context.cart.map((product, index)=>{
                 return(
                 <ItemsCartListContainer>
-                    <ItemDetailsLeft minicart={this.minicart}>
+                    <Link to={`/${product.id}`}><ItemDetailsLeft minicart={this.minicart}>
                         <ItemBrandText minicart={this.minicart}>{product.brand}</ItemBrandText>
                         <ItemNameText minicart={this.minicart}>{product.name}</ItemNameText>
                         
@@ -74,7 +75,7 @@ class ComponentItemsCartList extends Component{
                             minicart={this.minicart}
                         />
 
-                    </ItemDetailsLeft>
+                    </ItemDetailsLeft></Link>
 
                     <ItemDetailsRight>
                         <DetailsRightQuantity>

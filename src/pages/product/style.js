@@ -17,6 +17,7 @@ export const ProductPageContainer = styled.section`
     display: flex;
     justify-content: space-evenly;
     padding:  3vh 2.5vw;
+    margin: 10vh 0;
 `;
 
 export const ContainerMiniaturesBox = styled.div`
