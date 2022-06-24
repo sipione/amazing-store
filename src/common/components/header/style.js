@@ -174,9 +174,9 @@ export const CartBagPreview = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.5vh;
-    position: absolute;
-    top: 7vh;
-    right: -2.5vw;
+    position: fixed;
+    top: 10vh;
+    right: 2.5vw;
     padding: ${props=> props.bag ? "2.5vh" : "0vh"};
     background: ${mainColor};
     transition: 0.5s;
