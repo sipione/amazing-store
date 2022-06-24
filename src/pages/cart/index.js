@@ -34,7 +34,7 @@ class PageCart extends Component{
                     let total = 0;
                     this.context.cart.forEach(product=>{
                         const price = product.prices.find(price => price.currency.label === data.currency.label);
-                        total += price.amount;
+                        total += price.amount * product.quantity;
                     })
                     total = total*this.context.tax;
                     return(
