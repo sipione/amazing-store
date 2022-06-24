@@ -44,7 +44,7 @@ class PageShop extends Component{
                                 </CardImage>
 
                                 <CardDescription>
-                                    <ParagraphGeneral>{product.name}</ParagraphGeneral>
+                                    <ParagraphGeneral>{product.brand} {product.name}</ParagraphGeneral>
                                     
                                     <CurrencyContext.Consumer>
                                     {currencyData=>{
