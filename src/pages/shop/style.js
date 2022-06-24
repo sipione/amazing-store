@@ -27,7 +27,7 @@ export const ProductCard = styled.div`
     width: 26%;
     display: ${props=>props.category ? "flex" : "none"};
     flex-direction: column;
-    padding: 2.5%;
+    padding: 1%;
     transition: 0.5s;
     margin-bottom: 3vh;
     position: relative;
@@ -51,7 +51,8 @@ export const ProductCard = styled.div`
     
 
     :hover{
-        box-shadow: 0 5px 10px ${primaryColor};
+        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+        filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
 
         .cartwhite{
             opacity: 1;
