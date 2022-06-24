@@ -17,6 +17,7 @@ class pageProduct extends Component{
         this.state={
             product:false,
             mainImgSrc: "",
+            attrSelect: {}
         }
     }
 
@@ -38,15 +39,7 @@ class pageProduct extends Component{
     }
 
     handleSubmit(){
-        const inputs = [... document.querySelectorAll("input:checked")]
-        
-        let attributes = {};
-        
-        inputs.map(input=> {
-            const key = input.getAttribute("attributeName");
-            const value = input.value;
-            attributes[key]= value;
-        })
+        const attributes = {...this.state.attrSelect};
 
         this.state.product.attributes.length === Object.keys(attributes).length
         ? this.context.handleCart(this.state.product, attributes) : alert("Hello! How are you doing? I just came here to say you should choose the attributes of you product before add it to the cart");
@@ -111,6 +104,11 @@ class pageProduct extends Component{
                                                     name={customRandomInputName}
                                                     value={attributeItem.value}
                                                     attributeName={attribute.name}
+                                                    onChange={(event)=>{
+                                                        const obj = this.state.attrSelect;
+                                                        obj[attribute.name]=event.target.value;
+                                                        this.setState({attrSelect: obj })
+                                                    }}
                                                 />
                                                 <label htmlFor={attribute.id+attributeItem.value}><ParagraphGeneral>{attributeItem.value}</ParagraphGeneral></label>
                                             </ItemBoxValues>
@@ -133,7 +131,6 @@ class pageProduct extends Component{
                                 return(
                                     <div>
                                     <PriceValueText>{price.currency.symbol} {price.amount}</PriceValueText>
-
                                     </div>
                                 )
                             }}
@@ -152,7 +149,7 @@ class pageProduct extends Component{
                     </DetailButtonBox>
 
 
-                    <DetailsDescription dangerouslySetInnerHTML={{__html: this.state.product.description}}/>
+                    <DetailsDescription>{this.state.product.description}</DetailsDescription> 
                 </ContainerProductDetail>
             </ProductPageContainer>
         )

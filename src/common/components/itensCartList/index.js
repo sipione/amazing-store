@@ -1,9 +1,8 @@
 import { Component, memo } from "react";
 import {CurrencyContext} from "../../contexts/currencyContext";
 import { ProductsContext } from "../../contexts/productsContext";
-import { ParagraphRoboto, TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
 import AttributesCart from "../attributesCart";
-import { AreYouSureContainer, DetailsRightQuantity, ItemBrandText, ItemDetailsLeft, ItemDetailsRight, ItemDetailsRightGallery, ItemNameText, ItemPriceText, ItemsCartListContainer } from "./style";
+import { DetailsRightQuantity, ItemBrandText, ItemDetailsLeft, ItemDetailsRight, ItemDetailsRightGallery, ItemNameText, ItemPriceText, ItemsCartListContainer } from "./style";
 import {ReactComponent as Add} from '../../../assets/images/add.svg';
 import {ReactComponent as Remove} from '../../../assets/images/remove.svg';
 
@@ -60,8 +59,6 @@ class ComponentItemsCartList extends Component{
     }
 
     render(){
-        console.log(this.context)
-        console.log("rerenderização itemCartList Component")
         return(
             this.context.cart.map((product, index)=>{
                 return(
