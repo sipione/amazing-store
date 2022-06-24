@@ -2,7 +2,7 @@ import { Component } from "react";
 import { CardDescription, CardImage, ContainerProductsBox, ProductCard, ShopPageContainer, ShopPagePriceParagraph } from "./style";
 import queryAllProducts from "../../services/queryAllProducts";
 import { Link } from "react-router-dom";
-import {ParagraphGeneral, ParagraphRoboto, TitleRalewayH1, TitleRalewayH2, TitleRalewayH3} from '../../common/foundation/typography';
+import {ParagraphGeneral, TitleRalewayH1, TitleRalewayH2} from '../../common/foundation/typography';
 import {ProductsContext} from "../../common/contexts/productsContext";
 import {CurrencyContext} from "../../common/contexts/currencyContext";
 import {ReactComponent as CartWhite} from "../../assets/images/cartWhite.svg"
@@ -57,13 +57,14 @@ class PageShop extends Component{
                                     <CurrencyContext.Consumer>
                                     {currencyData=>{
                                         return(
+                                        // eslint-disable-next-line array-callback-return
                                         product.prices.map((price, index)=>{
                                             if(price.currency.label === currencyData.currency.label){
                                                 return(<ShopPagePriceParagraph key={price.label+index}>
                                                     {price.currency.symbol + price.amount}
                                                 </ShopPagePriceParagraph>)
-                                            } 
-                                        })
+                                            }
+                                        }) 
                                         )
                                     }}
                                     </CurrencyContext.Consumer>

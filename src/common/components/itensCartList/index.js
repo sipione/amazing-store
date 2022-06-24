@@ -63,7 +63,7 @@ class ComponentItemsCartList extends Component{
         return(
             this.context.cart.map((product, index)=>{
                 return(
-                <ItemsCartListContainer>
+                <ItemsCartListContainer key={product.id+index}>
                     <Link to={`/${product.id}`}><ItemDetailsLeft minicart={this.minicart}>
                         <ItemBrandText minicart={this.minicart}>{product.brand}</ItemBrandText>
                         <ItemNameText minicart={this.minicart}>{product.name}</ItemNameText>

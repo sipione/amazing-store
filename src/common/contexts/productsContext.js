@@ -46,7 +46,6 @@ class ProductsContextProvider extends Component{
             if(cart[i].id === productToCart.id 
                 && JSON.stringify(cart[i].selectedAttr) === JSON.stringify(productToCart.selectedAttr)){
                     cart[i].quantity += 1;
-                    console.log(cart)
                     this.handleTotalItems(cart);
                     return this.setState({cart: cart})
             }

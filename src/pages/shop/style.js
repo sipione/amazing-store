@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ParagraphGeneral } from '../../common/foundation/typography';
-import { mainColor, outOfStockColor, primaryColor, secondaryColor } from '../../common/foundation/variables';
+import { mainColor, outOfStockColor, secondaryColor } from '../../common/foundation/variables';
 
 //typography starts
 export const ShopPagePriceParagraph = styled(ParagraphGeneral)`
@@ -42,13 +42,19 @@ export const ProductCard = styled.div`
         align-items: center;
         transition: 0.5s;
         border-radius: 50%;
+        border: none;
 
         position: absolute;
         right: 10%;
         bottom: 15%;
-    }
 
-    
+        :hover{
+            transform: scale(1.1);
+            box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+            filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+            cursor: pointer;
+        }
+    }
 
     :hover{
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
