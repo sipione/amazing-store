@@ -2,10 +2,11 @@ import { Component } from "react";
 import { CardDescription, CardImage, ContainerProductsBox, ProductCard, ShopPageContainer, ShopPagePriceParagraph } from "./style";
 import queryAllProducts from "../../services/queryAllProducts";
 import { Link } from "react-router-dom";
-import {ParagraphGeneral, ParagraphRoboto, TitleRalewayH1, TitleRalewayH2, TitleRalewayH3} from '../../common/foundation/typography';
+import {ParagraphGeneral, TitleRalewayH1, TitleRalewayH2} from '../../common/foundation/typography';
 import {ProductsContext} from "../../common/contexts/productsContext";
 import {CurrencyContext} from "../../common/contexts/currencyContext";
 import {ReactComponent as CartWhite} from "../../assets/images/cartWhite.svg"
+import queryProductById from "../../services/queryProductById";
 
 class PageShop extends Component{
 
@@ -18,6 +19,13 @@ class PageShop extends Component{
 
     componentDidMount(){
         queryAllProducts().then(resp=>this.setState({products:[...resp.data.category.products]}))
+    }
+
+    prepareDataToAddCart = async(id)=>{
+        const newProduct = await queryProductById(id);
+        const attr = {};
+        newProduct.attributes.map(attribute=> attr[attribute.name] = attribute.items[0].value)
+        return {newProduct, attr}
     }
 
     render(){
@@ -37,35 +45,42 @@ class PageShop extends Component{
                             key={product.id+index}
                             category={product.category===productsData.category || productsData.category==="all"}
                             >
+                                <Link to={`/${product.id}`}>
                                 <span className="stock"> <TitleRalewayH2>OUT OF STOCK</TitleRalewayH2></span>
                                 <CardImage>
                                     <img src={product.gallery[0]} alt="product ilustrative representation"/>
                                 </CardImage>
 
-                                <Link to={`/${product.id}`}>
                                 <CardDescription>
-                                    <ParagraphGeneral>{product.name}</ParagraphGeneral>
+                                    <ParagraphGeneral>{product.brand} {product.name}</ParagraphGeneral>
                                     
                                     <CurrencyContext.Consumer>
                                     {currencyData=>{
                                         return(
+                                        // eslint-disable-next-line array-callback-return
                                         product.prices.map((price, index)=>{
                                             if(price.currency.label === currencyData.currency.label){
                                                 return(<ShopPagePriceParagraph key={price.label+index}>
                                                     {price.currency.symbol + price.amount}
                                                 </ShopPagePriceParagraph>)
-                                            } 
-                                        })
+                                            }
+                                        }) 
                                         )
                                     }}
                                     </CurrencyContext.Consumer>
 
                                 </CardDescription>
-                                
-                                <span className="cartwhite">
-                                    <CartWhite/> 
-                                </span>
                                 </Link>
+                                
+                                <button 
+                                className="cartwhite"
+                                onClick={async()=>{
+                                    const {newProduct, attr} = await this.prepareDataToAddCart(product.id)
+                                    return productsData.handleCart(newProduct, attr)
+                                }}
+                                >
+                                    <CartWhite/> 
+                                </button>
                             </ProductCard>
                         )
                     })}

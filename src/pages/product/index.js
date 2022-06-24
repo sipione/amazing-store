@@ -1,11 +1,12 @@
 import { Component } from "react";
 import ComponentButton from "../../common/components/button";
 import {ProductsContext} from "../../common/contexts/productsContext";
-import { ParagraphGeneral, ParagraphRoboto, TitleRalewayH1, TitleRalewayH2, TitleRalewayH3 } from "../../common/foundation/typography";
+import { ParagraphGeneral, TitleRalewayH1, TitleRalewayH2} from "../../common/foundation/typography";
 import queryProductById from "../../services/queryProductById";
 import Page404 from "../404";
 import { AttributesItemsBox, AttributesNamesText, ContainerMainImg, ContainerMiniaturesBox, ContainerProductDetail, DetailButtonBox, DetailPrice, DetailsAttributes, DetailsDescription, DetailsTitles, ItemBoxValues, PriceValueText, ProductPageContainer } from "./style";
 import {CurrencyContext} from '../../common/contexts/currencyContext.js';
+import DOMPurify from 'dompurify';
 
 
 class pageProduct extends Component{
@@ -17,6 +18,7 @@ class pageProduct extends Component{
         this.state={
             product:false,
             mainImgSrc: "",
+            attrSelect: {}
         }
     }
 
@@ -38,15 +40,7 @@ class pageProduct extends Component{
     }
 
     handleSubmit(){
-        const inputs = [... document.querySelectorAll("input:checked")]
-        
-        let attributes = {};
-        
-        inputs.map(input=> {
-            const key = input.getAttribute("attributeName");
-            const value = input.value;
-            attributes[key]= value;
-        })
+        const attributes = {...this.state.attrSelect};
 
         this.state.product.attributes.length === Object.keys(attributes).length
         ? this.context.handleCart(this.state.product, attributes) : alert("Hello! How are you doing? I just came here to say you should choose the attributes of you product before add it to the cart");
@@ -82,7 +76,7 @@ class pageProduct extends Component{
                 </ContainerMiniaturesBox>
 
                 <ContainerMainImg>
-                    <img src={this.state.mainImgSrc}/>
+                    <img src={this.state.mainImgSrc} alt="product main representation"/>
                 </ContainerMainImg>
 
                 <ContainerProductDetail>
@@ -111,6 +105,11 @@ class pageProduct extends Component{
                                                     name={customRandomInputName}
                                                     value={attributeItem.value}
                                                     attributeName={attribute.name}
+                                                    onChange={(event)=>{
+                                                        const obj = this.state.attrSelect;
+                                                        obj[attribute.name]=event.target.value;
+                                                        this.setState({attrSelect: obj })
+                                                    }}
                                                 />
                                                 <label htmlFor={attribute.id+attributeItem.value}><ParagraphGeneral>{attributeItem.value}</ParagraphGeneral></label>
                                             </ItemBoxValues>
@@ -129,11 +128,10 @@ class pageProduct extends Component{
 
                         <CurrencyContext.Consumer>
                             {currencyData=>{
-                                    const price = this.state.product.prices.find(price=> price.currency.label == currencyData.currency.label)
+                                    const price = this.state.product.prices.find(price=> price.currency.label === currencyData.currency.label)
                                 return(
                                     <div>
                                     <PriceValueText>{price.currency.symbol} {price.amount}</PriceValueText>
-
                                     </div>
                                 )
                             }}
@@ -144,15 +142,14 @@ class pageProduct extends Component{
                     <DetailButtonBox
                     onClick={(event)=>{
                         event.preventDefault();
-
-                        this.handleSubmit();
+                        this.state.product.inStock ? this.handleSubmit() : alert("Sorry, this product is out of stock. Subcribe for newsletter to be informed about our news and stock replenishment");
                     }}
                     >
-                    <ComponentButton>ADD TO CART</ComponentButton>
+                    <ComponentButton desable={!this.state.product.inStock} >ADD TO CART</ComponentButton>
                     </DetailButtonBox>
 
 
-                    <DetailsDescription dangerouslySetInnerHTML={{__html: this.state.product.description}}/>
+                    <DetailsDescription dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(this.state.product.description)}}/>
                 </ContainerProductDetail>
             </ProductPageContainer>
         )

@@ -4,14 +4,15 @@ import { ButtonComponent } from "./style";
 
 class ComponentButton extends Component{
 
-    constructor({props, variant=false}){
+    constructor({props, variant=false, desable=false}){
         super(props);
         this.variant = variant;
+        this.desable = desable;
     }
 
     render(){
         return(
-            <ButtonComponent variant={this.variant}>{this.props.children}</ButtonComponent>
+            <ButtonComponent desable={this.desable} variant={this.variant}>{this.props.children}</ButtonComponent>
         )
     }
 }

@@ -17,6 +17,7 @@ export const ProductPageContainer = styled.section`
     display: flex;
     justify-content: space-evenly;
     padding:  3vh 2.5vw;
+    margin: 10vh 0;
 `;
 
 export const ContainerMiniaturesBox = styled.div`
@@ -72,7 +73,8 @@ export const DetailsAttributes = styled.form`
 export const AttributesItemsBox = styled.div`
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 1.5vw;
 `;
 
 export const ItemBoxValues = styled.div`
@@ -128,6 +130,7 @@ export const DetailPrice = styled.div`
 
 export const DetailButtonBox = styled.div`
     width: 100%;
+    max-width: 20vw;
 `;
 
 export const DetailsDescription = styled.div`

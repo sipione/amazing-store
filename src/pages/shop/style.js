@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ParagraphGeneral } from '../../common/foundation/typography';
-import { mainColor, outOfStockColor, primaryColor, secondaryColor } from '../../common/foundation/variables';
+import { mainColor, outOfStockColor, secondaryColor } from '../../common/foundation/variables';
 
 //typography starts
 export const ShopPagePriceParagraph = styled(ParagraphGeneral)`
@@ -13,6 +13,7 @@ export const ShopPageContainer = styled.section`
     display: flex;
     flex-direction: column;
     padding: 0 2.5vw;
+    margin: 10vh 0;
 `;
 
 export const ContainerProductsBox = styled.div`
@@ -26,7 +27,7 @@ export const ProductCard = styled.div`
     width: 26%;
     display: ${props=>props.category ? "flex" : "none"};
     flex-direction: column;
-    padding: 2.5%;
+    padding: 1%;
     transition: 0.5s;
     margin-bottom: 3vh;
     position: relative;
@@ -41,16 +42,23 @@ export const ProductCard = styled.div`
         align-items: center;
         transition: 0.5s;
         border-radius: 50%;
+        border: none;
 
         position: absolute;
         right: 10%;
         bottom: 15%;
+
+        :hover{
+            transform: scale(1.1);
+            box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+            filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+            cursor: pointer;
+        }
     }
 
-    
-
     :hover{
-        box-shadow: 0 5px 10px ${primaryColor};
+        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+        filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
 
         .cartwhite{
             opacity: 1;

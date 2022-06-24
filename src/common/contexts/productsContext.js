@@ -9,14 +9,24 @@ class ProductsContextProvider extends Component{
         super(props);
         this.state={
             cart: [],
-            category: "all",
+            category: window.sessionStorage.getItem("category") || "all",
             totalItems: 0,
             tax: 0.21
         }
     }
 
+    /*componentDidMount(){
+        if(window.sessionStorage.getItem("cart")){
+            const array =  JSON.parse(window.sessionStorage.getItem("cart"));
+            console.log(array);
+            this.setState({cart: array});
+            this.handleTotalItems(array);
+        }
+    }*/
+
     handleCategory = (newCategory)=>{
         this.setState({category: newCategory});
+        window.sessionStorage.setItem("category", newCategory)
     }
 
     handleCart = (product, attributesSelected)=>{
@@ -36,7 +46,6 @@ class ProductsContextProvider extends Component{
             if(cart[i].id === productToCart.id 
                 && JSON.stringify(cart[i].selectedAttr) === JSON.stringify(productToCart.selectedAttr)){
                     cart[i].quantity += 1;
-                    console.log(cart)
                     this.handleTotalItems(cart);
                     return this.setState({cart: cart})
             }
@@ -46,6 +55,7 @@ class ProductsContextProvider extends Component{
 
         this.handleTotalItems(cart);
         
+        window.sessionStorage.setItem("cart", JSON.stringify(cart))
         return this.setState({cart: cart});
     }
 
@@ -53,9 +63,13 @@ class ProductsContextProvider extends Component{
         const array = this.state.cart;
         array.map(item=> item.id === product.id 
             && JSON.stringify(item.selectedAttr)=== JSON.stringify(product.selectedAttr) 
-            ? item.quantity += 1 : "");
+            ? item.quantity += 1 : ""
+        );
 
         this.handleTotalItems(array);
+
+        window.sessionStorage.setItem("cart", JSON.stringify(array))
+
         return this.setState({cart: array})
     }
 
@@ -68,7 +82,11 @@ class ProductsContextProvider extends Component{
             : item.quantity -= 1 
             : ""
         );
+
         this.handleTotalItems(array);
+
+        window.sessionStorage.setItem("cart", JSON.stringify(array))
+
         return this.setState({cart: array})
     }
 
@@ -78,6 +96,8 @@ class ProductsContextProvider extends Component{
         cart.forEach(product => {
             return items += product.quantity
         });
+
+        window.sessionStorage.setItem("totalItems", items)
 
         return this.setState({totalItems: items})
     }

@@ -6,7 +6,7 @@ export const CartPageContainer = styled.section`
     flex-direction: column;
     gap: 3vh;
     padding: 0 2.5vw;
-    margin-bottom: 6vh;
+    margin: 10vh 0;
 `;
 
 export const CartProductsList = styled.div`

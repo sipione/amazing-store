@@ -1,9 +1,9 @@
 import { Component, memo } from "react";
+import {Link} from 'react-router-dom';
 import {CurrencyContext} from "../../contexts/currencyContext";
 import { ProductsContext } from "../../contexts/productsContext";
-import { ParagraphRoboto, TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
 import AttributesCart from "../attributesCart";
-import { AreYouSureContainer, DetailsRightQuantity, ItemBrandText, ItemDetailsLeft, ItemDetailsRight, ItemDetailsRightGallery, ItemNameText, ItemPriceText, ItemsCartListContainer } from "./style";
+import { DetailsRightQuantity, ItemBrandText, ItemDetailsLeft, ItemDetailsRight, ItemDetailsRightGallery, ItemNameText, ItemPriceText, ItemsCartListContainer } from "./style";
 import {ReactComponent as Add} from '../../../assets/images/add.svg';
 import {ReactComponent as Remove} from '../../../assets/images/remove.svg';
 
@@ -63,8 +63,8 @@ class ComponentItemsCartList extends Component{
         return(
             this.context.cart.map((product, index)=>{
                 return(
-                <ItemsCartListContainer>
-                    <ItemDetailsLeft minicart={this.minicart}>
+                <ItemsCartListContainer key={product.id+index}>
+                    <Link to={`/${product.id}`}><ItemDetailsLeft minicart={this.minicart}>
                         <ItemBrandText minicart={this.minicart}>{product.brand}</ItemBrandText>
                         <ItemNameText minicart={this.minicart}>{product.name}</ItemNameText>
                         
@@ -75,7 +75,7 @@ class ComponentItemsCartList extends Component{
                             minicart={this.minicart}
                         />
 
-                    </ItemDetailsLeft>
+                    </ItemDetailsLeft></Link>
 
                     <ItemDetailsRight>
                         <DetailsRightQuantity>

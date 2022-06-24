@@ -5,22 +5,26 @@ export default async function queryAllProducts(){
     const response = await Client.query({
         query: gql`
         query{
-            category{
-            name 
-            products{id
-            name
+          category{
+          name
+          products{
+            id
             inStock
-            gallery
-            category
             prices{
-              currency {
+              currency{
                 label
                 symbol
               } 
-              amount}
-            brand}
-          }}
-        `
+              amount
+            }
+            name
+            brand
+            description
+            gallery
+            category
+          }
+        }}
+      `
     })
     return response
 }

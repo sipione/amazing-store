@@ -14,6 +14,10 @@ class CurrencyContextProvider extends Component{
     }
 
     componentDidMount(){
+        if(window.sessionStorage.getItem("currency")){
+            const object = JSON.parse(window.sessionStorage.getItem("currency"));
+            return this.setState({currency: object})
+        }
         queryCurrency()
         .then(resp=>this.setState({
             currency: {
@@ -25,6 +29,7 @@ class CurrencyContextProvider extends Component{
 
     handleCurrency = (newCurrency)=>{
         this.setState({currency: newCurrency});
+        window.sessionStorage.setItem("currency", JSON.stringify(newCurrency))
     }
 
     render(){

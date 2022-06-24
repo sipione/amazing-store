@@ -1,4 +1,3 @@
-import { printIntrospectionSchema } from "graphql";
 import styled from "styled-components";
 import { TitleRalewayH2, TitleRalewayH3 } from "../../foundation/typography";
 import { backgroundSelectedItemColor, h2FontSize, h3FontSize, mainColor, paragraphFontSize, primaryColor } from "../../foundation/variables";
@@ -26,11 +25,14 @@ export const ItemsCartListContainer = styled.div`
     justify-content: space-between;
     border-bottom:1px solid ${backgroundSelectedItemColor};
     margin-bottom: 3vh;
+    a{
+        width: 40%;
+    }
 `;
 
 
 export const ItemDetailsLeft = styled.div`
-    width: 40%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: ${props=>props.minicart ? "1vh" : "2vh"};
