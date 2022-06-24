@@ -6,6 +6,7 @@ import {ParagraphGeneral, ParagraphRoboto, TitleRalewayH1, TitleRalewayH2, Title
 import {ProductsContext} from "../../common/contexts/productsContext";
 import {CurrencyContext} from "../../common/contexts/currencyContext";
 import {ReactComponent as CartWhite} from "../../assets/images/cartWhite.svg"
+import queryProductById from "../../services/queryProductById";
 
 class PageShop extends Component{
 
@@ -18,6 +19,13 @@ class PageShop extends Component{
 
     componentDidMount(){
         queryAllProducts().then(resp=>this.setState({products:[...resp.data.category.products]}))
+    }
+
+    prepareDataToAddCart = async(id)=>{
+        const newProduct = await queryProductById(id);
+        const attr = {};
+        newProduct.attributes.map(attribute=> attr[attribute.name] = attribute.items[0].value)
+        return {newProduct, attr}
     }
 
     render(){
@@ -63,9 +71,15 @@ class PageShop extends Component{
                                 </CardDescription>
                                 </Link>
                                 
-                                <span className="cartwhite">
+                                <button 
+                                className="cartwhite"
+                                onClick={async()=>{
+                                    const {newProduct, attr} = await this.prepareDataToAddCart(product.id)
+                                    return productsData.handleCart(newProduct, attr)
+                                }}
+                                >
                                     <CartWhite/> 
-                                </span>
+                                </button>
                             </ProductCard>
                         )
                     })}

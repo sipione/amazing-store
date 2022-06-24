@@ -31,7 +31,7 @@ export default async function queryProductById(productId){
             amount}
           brand
         }}
-        `
+      `
     })
     return response.data.product;
 }

@@ -15,14 +15,14 @@ class ProductsContextProvider extends Component{
         }
     }
 
-    componentDidMount(){
+    /*componentDidMount(){
         if(window.sessionStorage.getItem("cart")){
             const array =  JSON.parse(window.sessionStorage.getItem("cart"));
             console.log(array);
             this.setState({cart: array});
             this.handleTotalItems(array);
         }
-    }
+    }*/
 
     handleCategory = (newCategory)=>{
         this.setState({category: newCategory});
