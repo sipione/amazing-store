@@ -1,14 +1,18 @@
 import { gql } from "@apollo/client";
 import { Client } from "./apolloClientService";
 
-export default async function queryAllProducts(){
+export default async function queryAllProducts(category){
     const response = await Client.query({
         query: gql`
-        query{
-          category{
+        query{category(input:{title: "${category}"}){
           name
           products{
             id
+            name
+            inStock
+            gallery
+            description
+            category
             attributes{
               id
               name
@@ -19,22 +23,18 @@ export default async function queryAllProducts(){
                 value
               }
             }
-            inStock
             prices{
-              currency{
-                label
-                symbol
-              } 
               amount
+              currency{
+                label 
+                symbol
+              }
             }
-            name
             brand
-            description
-            gallery
-            category
           }
         }}
       `
     })
-    return response
+    
+    return response.data.category.products
 }
