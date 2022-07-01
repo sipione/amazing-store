@@ -21,8 +21,8 @@ class PageShop extends Component{
         queryAllProducts().then(resp=>this.setState({products:[...resp.data.category.products]}))
     }
 
-    prepareDataToAddCart = async(id)=>{
-        const newProduct = await queryProductById(id);
+    addCartDataPreparation = async(id)=>{
+        const newProduct = this.state.products.find(product=>product.id === id)
         const attr = {};
         newProduct.attributes.map(attribute=> attr[attribute.name] = attribute.items[0].value)
         return {newProduct, attr}
@@ -75,7 +75,7 @@ class PageShop extends Component{
                                 <button 
                                 className="cartwhite"
                                 onClick={async()=>{
-                                    const {newProduct, attr} = await this.prepareDataToAddCart(product.id)
+                                    const {newProduct, attr} = await this.addCartDataPreparation(product.id)
                                     return productsData.handleCart(newProduct, attr)
                                 }}
                                 >

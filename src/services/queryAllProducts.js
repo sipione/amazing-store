@@ -9,6 +9,16 @@ export default async function queryAllProducts(){
           name
           products{
             id
+            attributes{
+              id
+              name
+              type
+              items{
+                displayValue
+                id
+                value
+              }
+            }
             inStock
             prices{
               currency{
