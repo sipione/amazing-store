@@ -1,4 +1,5 @@
 import { Component, createContext, memo } from "react";
+import queryAllProducts from "../../services/queryAllProducts";
 
 
 export const ProductsContext = createContext();
@@ -8,25 +9,30 @@ class ProductsContextProvider extends Component{
     constructor({props}){
         super(props);
         this.state={
+            products: [],
             cart: [],
             category: window.sessionStorage.getItem("category") || "all",
             totalItems: 0,
-            tax: 0.21
+            tax: 0.21,
+            loading: false
         }
     }
 
-    /*componentDidMount(){
-        if(window.sessionStorage.getItem("cart")){
-            const array =  JSON.parse(window.sessionStorage.getItem("cart"));
-            console.log(array);
-            this.setState({cart: array});
-            this.handleTotalItems(array);
-        }
-    }*/
+    componentDidMount(){
+        this.queryProdctsOfTheCategory(this.state.category);
+    }
+
+    async queryProdctsOfTheCategory(category){
+        this.setState({loading:true})
+        const arrayOfProducts = await queryAllProducts(category);
+        this.setState({products:[...arrayOfProducts]})
+        this.setState({loading: false})
+    }
 
     handleCategory = (newCategory)=>{
         this.setState({category: newCategory});
         window.sessionStorage.setItem("category", newCategory)
+        this.queryProdctsOfTheCategory(newCategory)
     }
 
     handleCart = (product, attributesSelected)=>{
@@ -55,7 +61,6 @@ class ProductsContextProvider extends Component{
 
         this.handleTotalItems(cart);
         
-        window.sessionStorage.setItem("cart", JSON.stringify(cart))
         return this.setState({cart: cart});
     }
 
@@ -67,8 +72,6 @@ class ProductsContextProvider extends Component{
         );
 
         this.handleTotalItems(array);
-
-        window.sessionStorage.setItem("cart", JSON.stringify(array))
 
         return this.setState({cart: array})
     }
@@ -85,8 +88,6 @@ class ProductsContextProvider extends Component{
 
         this.handleTotalItems(array);
 
-        window.sessionStorage.setItem("cart", JSON.stringify(array))
-
         return this.setState({cart: array})
     }
 
@@ -97,17 +98,15 @@ class ProductsContextProvider extends Component{
             return items += product.quantity
         });
 
-        window.sessionStorage.setItem("totalItems", items)
-
         return this.setState({totalItems: items})
     }
 
     render(){
-        const {cart, category, totalItems, tax} = this.state;
+        const {cart, category, totalItems, tax, products, loading} = this.state;
         const {handleCategory, handleCart, quickAddItem, quickremoveItem} = this;
 
         return(
-            <ProductsContext.Provider value={{cart, category, totalItems, tax, handleCategory, handleCart, quickAddItem, quickremoveItem}}>
+            <ProductsContext.Provider value={{cart, category, totalItems, tax, products, loading, handleCategory, handleCart, quickAddItem, quickremoveItem}}>
                 {this.props.children}
             </ProductsContext.Provider>
         )
