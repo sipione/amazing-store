@@ -1,4 +1,4 @@
-# The Aamazing store
+# The Amazing store
 
 An multi-currencies e-commerce using Apollo-client to consume the data, React, react-router-dom and styled-components. Working on http://amazing.sipione.tech and the back-end is on the heroku
 
